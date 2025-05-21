@@ -19,5 +19,14 @@ export const useTodoStore = defineStore('todo', () => {
     await axios.put(`http://localhost:3000/api/todos/${todo.id}`, todo);
   }
 
-  return { todos, fetchTodos, addTodo, updateTodo };
+  async function removeTodo(todoId) {
+    try {
+      await axios.delete(`http://localhost:3000/api/todos/${todoId}`);
+      todos.value = todos.value.filter(todo => todo.id !== todoId);
+    } catch (error) {
+      console.error('Failed to delete todo:', error);
+    }
+  }
+
+  return { todos, fetchTodos, addTodo, updateTodo, removeTodo };
 });

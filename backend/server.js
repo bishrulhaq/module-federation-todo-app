@@ -47,4 +47,15 @@ app.put('/api/todos/:id', (req, res) => {
   );
 });
 
+app.delete('/api/todos/:id', (req, res) => {
+  const { id } = req.params;
+  db.run(`DELETE FROM todos WHERE id = ?`, [id], err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to delete todo' });
+    }
+    res.sendStatus(204);
+  });
+});
+
 app.listen(port, () => console.log(`API running on http://localhost:${port}`));
