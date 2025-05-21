@@ -146,3 +146,8 @@ build
 
 # Optional shims from Winget
 *.shim
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
